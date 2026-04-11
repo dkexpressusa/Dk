@@ -74,7 +74,7 @@ export default function HeroBanner() {
             {[
               { value: '17+', label: t('운영 경력 (2008~)', 'Years of Service') },
               { value: '98%', label: t('정시 배송률', 'On-time Delivery') },
-              { value: 'CJ', label: t('공식 연계', 'Official Partner') },
+              { value: 'CJ', label: t('택배 연계', 'Official Partner') },
               { value: '24/7', label: t('고객 지원', 'Customer Support') },
             ].map((s) => (
               <div key={s.label} className="text-center">

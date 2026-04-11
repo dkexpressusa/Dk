@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { supabase } from '@/lib/supabase';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -12,19 +13,17 @@ export default function Contact() {
     setError(null);
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const params = new URLSearchParams();
-    formData.forEach((value, key) => {
-      params.append(key, value as string);
-    });
+    const payload: Record<string, unknown> = {
+      name: formData.get('name') as string,
+      phone: (formData.get('phone') as string) || null,
+      email: formData.get('email') as string,
+      type: (formData.get('service') as string) || null,
+      message: formData.get('message') as string,
+      status: 'unread',
+    };
     try {
-      const response = await fetch('https://readdy.ai/api/form/d78rcerll6jbq2vddem0', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
-      });
-      if (!response.ok) {
-        throw new Error(`서버 오류: ${response.status}`);
-      }
+      const { error: dbError } = await supabase.from('contacts').insert([payload]);
+      if (dbError) throw dbError;
       setSubmitted(true);
     } catch {
       setError('전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
