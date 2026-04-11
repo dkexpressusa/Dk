@@ -42,7 +42,7 @@ export default function KakaoModal({ onClose }: KakaoModalProps) {
           <p className="text-xs text-gray-400 font-semibold mb-3">카카오톡 QR 코드</p>
           <div className="w-40 h-40 mx-auto bg-white rounded-xl flex items-center justify-center border border-gray-200 overflow-hidden">
             <img
-              src="https://static.readdy.ai/image/c9bac741b789e463d3d04fe118120cf8/60c77286dd9f4adf5b66b4cc4ae9e516.png"
+              src="/images/KakaoTalk_20260407_002904904.jpg"
               alt="카카오톡 QR코드"
               className="w-full h-full object-contain"
             />
