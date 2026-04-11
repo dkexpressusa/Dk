@@ -11,7 +11,7 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "src='/images/c6d25f9e3d112ebca363a91dc1a0f152,jpg'",
+            "url('/images/c6d25f9e3d112ebca363a91dc1a0f152,jpg')",
         }}
       />
       {/* Overlay */}
