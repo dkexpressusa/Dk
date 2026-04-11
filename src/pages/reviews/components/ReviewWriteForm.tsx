@@ -33,7 +33,7 @@ export default function ReviewWriteForm({ onSubmitted }: { onSubmitted?: () => v
         message: message.trim(),
         service_type: serviceType || null,
         is_private: isPrivate,
-        status: 'approved',
+        status: 'pending',
       });
 
       if (dbError) throw dbError;
