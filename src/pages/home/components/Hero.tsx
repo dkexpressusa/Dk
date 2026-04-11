@@ -11,7 +11,7 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://readdy.ai/api/search-image?query=New%20York%20City%20skyline%20at%20blue%20hour%20dusk%20with%20airplane%20flying%20over%20Manhattan%20skyscrapers%20dramatic%20sky%20cargo%20shipping%20logistics%20professional%20photography%20wide%20angle%20cinematic&width=1440&height=720&seq=dkexpress-hero-001&orientation=landscape')",
+            "src='/images/c6d25f9e3d112ebca363a91dc1a0f152,jpg'",
         }}
       />
       {/* Overlay */}
