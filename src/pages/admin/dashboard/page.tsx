@@ -61,7 +61,7 @@ export default function AdminDashboardPage() {
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'contacts' }, (payload) => {
         const newContact = payload.new as Contact;
         setContacts(prev => [newContact, ...prev]);
-        if (Notification.permission === 'granted') {
+        if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
           new Notification('새 문의가 접수되었습니다', {
             body: `${newContact.name}님의 문의가 접수되었습니다.`,
             icon: '/favicon.ico',
@@ -77,7 +77,15 @@ export default function AdminDashboardPage() {
   }, [fetchPendingReviewCount]);
 
   useEffect(() => {
-    if (Notification.permission === 'default') Notification.requestPermission();
+    if (typeof Notification !== 'undefined') {
+      if (Notification.permission === 'default') {
+        try {
+          Notification.requestPermission();
+        } catch {
+          /* ignore */
+        }
+      }
+    }
   }, []);
 
   const playNotificationSound = () => {
