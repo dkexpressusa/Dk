@@ -5,7 +5,7 @@ export default function WhyUs() {
 
   const reasons = [
     { icon: 'ri-calendar-check-line', title: t('2008년부터 운영', 'Operating Since 2008'), desc: t('17년간 수천 건 이상의 배송 경험. 오랜 노하우로 어떤 상황에서도 안전하게 처리합니다.', '17+ years and thousands of shipments. Our expertise ensures safe handling in any situation.'), highlight: t('17년+ 경력', '17+ Years') },
-    { icon: 'ri-truck-line', title: t('CJ택배 공식 연계', 'Official CJ Logistics Partner'), desc: t('한국 최대 물류 네트워크 CJ택배와 연계하여 전국 어디든 빠르고 안전하게 배송합니다.', 'Partnered with CJ Logistics, Korea\'s largest delivery network, for fast and safe nationwide delivery.'), highlight: 'CJ택배' },
+    { icon: 'ri-truck-line', title: t('CJ택배 연계', 'Official CJ Logistics Partner'), desc: t('한국 최대 물류 네트워크 CJ택배와 연계하여 전국 어디든 빠르고 안전하게 배송합니다.', 'Partnered with CJ Logistics, Korea\'s largest delivery network, for fast and safe nationwide delivery.'), highlight: 'CJ택배' },
     { icon: 'ri-customer-service-2-line', title: t('빠른 상담 대응', 'Fast Customer Support'), desc: t('문의만 주시면 끝까지 안내해드립니다. 전화, 이메일로 신속하게 답변드립니다.', 'We guide you through every step. Quick responses via phone and email.'), highlight: t('즉시 상담', 'Instant Support') },
     { icon: 'ri-shield-check-line', title: t('전 과정 책임 배송', 'End-to-End Responsibility'), desc: t('뉴욕 출발부터 한국 도착까지 전 과정을 책임집니다. 기본 보험 적용으로 안심 배송.', 'We take full responsibility from NY departure to Korea arrival. Basic insurance included.'), highlight: t('책임 보장', 'Guaranteed') },
   ];
