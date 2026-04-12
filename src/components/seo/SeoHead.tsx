@@ -1,63 +1,43 @@
-import { useEffect } from "react";
+import { Fragment, useLayoutEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { useLocation } from "react-router-dom";
 import { normalizePathname, resolveSeo } from "@/config/seo";
 
-function upsertMeta(attr: "name" | "property", key: string, content: string) {
-  const metas = document.head.querySelectorAll("meta");
-  for (let i = 0; i < metas.length; i++) {
-    const m = metas[i];
-    if (m.getAttribute(attr) === key) {
-      m.setAttribute("content", content);
-      return;
-    }
-  }
-  const el = document.createElement("meta");
-  el.setAttribute(attr, key);
-  el.setAttribute("content", content);
-  document.head.appendChild(el);
-}
-
-function upsertLink(rel: string, href: string) {
-  const links = document.head.querySelectorAll(`link[rel="${rel}"]`);
-  if (links.length > 0) {
-    (links[0] as HTMLLinkElement).setAttribute("href", href);
-    return;
-  }
-  const el = document.createElement("link");
-  el.setAttribute("rel", rel);
-  el.setAttribute("href", href);
-  document.head.appendChild(el);
-}
-
 /**
- * 라우트 변경 시 title·meta·canonical·OG·Twitter를 갱신합니다.
+ * document.head에 React 포털로 메타를 주입합니다.
+ * (CSR에서 useEffect만 쓰면 페인트·검사 타이밍에 태그가 안 보이는 경우가 있어
+ *  useLayoutEffect + 포털로 동일 커밋에서 head를 갱신합니다.)
  */
 export default function SeoHead() {
   const { pathname } = useLocation();
+  const seo = useMemo(
+    () => resolveSeo(normalizePathname(pathname)),
+    [pathname],
+  );
 
-  useEffect(() => {
-    const path = normalizePathname(pathname);
-    const seo = resolveSeo(path);
-
-    document.title = seo.title;
+  useLayoutEffect(() => {
     document.documentElement.lang = "ko";
+  }, []);
 
-    upsertMeta("name", "description", seo.description);
-    upsertLink("canonical", seo.canonicalUrl);
+  const head = typeof document !== "undefined" ? document.head : null;
+  if (!head) return null;
 
-    upsertMeta("name", "robots", seo.robots ?? "index, follow");
-
-    upsertMeta("property", "og:title", seo.ogTitle);
-    upsertMeta("property", "og:description", seo.ogDescription);
-    upsertMeta("property", "og:type", seo.ogType);
-    upsertMeta("property", "og:url", seo.canonicalUrl);
-    upsertMeta("property", "og:image", seo.ogImageUrl);
-
-    upsertMeta("name", "twitter:card", "summary_large_image");
-    upsertMeta("name", "twitter:title", seo.ogTitle);
-    upsertMeta("name", "twitter:description", seo.ogDescription);
-    upsertMeta("name", "twitter:image", seo.ogImageUrl);
-  }, [pathname]);
-
-  return null;
+  return createPortal(
+    <Fragment key={pathname}>
+      <title>{seo.title}</title>
+      <meta name="description" content={seo.description} />
+      <link rel="canonical" href={seo.canonicalUrl} />
+      <meta name="robots" content={seo.robots ?? "index, follow"} />
+      <meta property="og:title" content={seo.ogTitle} />
+      <meta property="og:description" content={seo.ogDescription} />
+      <meta property="og:type" content={seo.ogType} />
+      <meta property="og:url" content={seo.canonicalUrl} />
+      <meta property="og:image" content={seo.ogImageUrl} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={seo.ogTitle} />
+      <meta name="twitter:description" content={seo.ogDescription} />
+      <meta name="twitter:image" content={seo.ogImageUrl} />
+    </Fragment>,
+    head,
+  );
 }

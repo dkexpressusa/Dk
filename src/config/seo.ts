@@ -3,12 +3,13 @@
  * 배포 도메인은 VITE_PUBLIC_SITE_URL 로 덮어쓸 수 있습니다.
  */
 
-export const SITE_URL = (
-  import.meta.env.VITE_PUBLIC_SITE_URL ?? "https://dkexpress.us"
-)
-  .trim()
-  .replace(/\s+/g, "")
-  .replace(/\/+$/, "");
+const DEFAULT_SITE_URL = "https://dkexpress.us";
+
+export const SITE_URL = (() => {
+  const raw = import.meta.env.VITE_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL;
+  const cleaned = String(raw).trim().replace(/\s+/g, "").replace(/\/+$/, "");
+  return cleaned || DEFAULT_SITE_URL;
+})();
 
 /** public 폴더 기준 OG 이미지 경로 (절대 URL로 변환됨) */
 export const DEFAULT_OG_IMAGE_PATH = "/og-image.jpg";
