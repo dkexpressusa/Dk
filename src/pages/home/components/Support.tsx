@@ -1,3 +1,5 @@
+import { openKakaoChatLink } from '@/constants/openKakao';
+
 const supportItems = [
   {
     icon: 'ri-search-eye-line',
@@ -79,18 +81,18 @@ export default function Support() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
             <a
-              href="tel:7187626488"
+              {...openKakaoChatLink}
               className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-full transition-colors whitespace-nowrap cursor-pointer"
             >
-              <i className="ri-phone-line"></i>
-              718-762-6488
+              <i className="ri-chat-3-line"></i>
+              카카오톡 상담
             </a>
             <a
-              href="mailto:dkexpressusa@gmail.com"
+              {...openKakaoChatLink}
               className="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white font-semibold px-6 py-3 rounded-full transition-colors whitespace-nowrap cursor-pointer"
             >
-              <i className="ri-mail-line"></i>
-              이메일 문의
+              <i className="ri-send-plane-line"></i>
+              문의하기
             </a>
           </div>
         </div>

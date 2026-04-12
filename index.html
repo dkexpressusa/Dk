@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpeg" href="/images/c6d25f9e3d112ebca363a91dc1a0f152.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- title·description·canonical·OG 등은 SeoHead(React)가 document.head에 주입 -->
+    <!-- JS 미실행 크롤러(카카오 등)용 기본 OG. 로드 후 SeoHead가 data-og-default 태그를 제거하고 동일 키를 갱신합니다. -->
+    <meta property="og:title" content="뉴욕 한국택배 dkexpress" data-og-default />
+    <meta property="og:description" content="미국 ↔ 한국 택배 및 귀국이사 전문 서비스" data-og-default />
+    <meta property="og:image" content="https://dkexpress.us/og-image.jpg" data-og-default />
+    <meta property="og:url" content="https://dkexpress.us" data-og-default />
+    <meta property="og:type" content="website" data-og-default />
+    <!-- title·description·canonical·나머지 OG/Twitter는 SeoHead(React)가 document.head에 주입 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">

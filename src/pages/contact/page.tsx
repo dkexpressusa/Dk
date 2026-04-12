@@ -2,17 +2,14 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
-import PhoneModal from '@/components/base/PhoneModal';
-import KakaoModal from '@/components/base/KakaoModal';
 import { supabase } from '@/lib/supabase';
 import { useLang } from '@/contexts/LanguageContext';
+import { openKakaoChatLink } from '@/constants/openKakao';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serviceType, setServiceType] = useState('');
-  const [showPhone, setShowPhone] = useState(false);
-  const [showKakao, setShowKakao] = useState(false);
   const [error, setError] = useState('');
   const { t } = useLang();
 
@@ -103,20 +100,20 @@ export default function ContactPage() {
                 <i className="ri-customer-service-line text-orange-500"></i>{t('고객문의', 'Customer Support')}
               </h3>
               <div className="space-y-3">
-                <button onClick={() => setShowPhone(true)} className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl hover:bg-orange-50 transition-colors cursor-pointer w-full text-left">
-                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center"><i className="ri-phone-line text-white text-lg"></i></div>
+                <a {...openKakaoChatLink} className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl hover:bg-orange-50 transition-colors cursor-pointer w-full text-left">
+                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center"><i className="ri-send-plane-line text-white text-lg"></i></div>
                   <div>
-                    <p className="text-xs text-gray-400">{t('전화 상담', 'Phone')}</p>
-                    <p className="font-bold text-gray-900">718-762-6488</p>
+                    <p className="text-xs text-gray-400">{t('문의하기', 'Contact')}</p>
+                    <p className="font-bold text-gray-900">{t('카카오 오픈채팅', 'Kakao Open Chat')}</p>
                   </div>
-                </button>
-                <button onClick={() => setShowKakao(true)} className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl hover:bg-yellow-50 transition-colors cursor-pointer w-full text-left">
+                </a>
+                <a {...openKakaoChatLink} className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl hover:bg-yellow-50 transition-colors cursor-pointer w-full text-left">
                   <div className="w-10 h-10 bg-[#FEE500] rounded-lg flex items-center justify-center"><i className="ri-chat-3-line text-[#3C1E1E] text-lg"></i></div>
                   <div>
                     <p className="text-xs text-gray-400">KakaoTalk</p>
                     <p className="font-bold text-gray-900">DKEXPRESS</p>
                   </div>
-                </button>
+                </a>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-gray-200 h-52">
@@ -189,8 +186,6 @@ export default function ContactPage() {
         </div>
       </section>
       <Footer />
-      {showPhone && <PhoneModal onClose={() => setShowPhone(false)} />}
-      {showKakao && <KakaoModal onClose={() => setShowKakao(false)} />}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
+import { openKakaoChatLink } from '@/constants/openKakao';
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -61,12 +62,12 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-white text-sm mb-4">{t('고객문의', 'Contact')}</h4>
             <div className="space-y-3">
-              <span className="flex items-center gap-2 text-white/60 text-sm">
-                <i className="ri-chat-3-line text-orange-400"></i>KakaoTalk: dkexpress
-              </span>
-              <button onClick={() => navigate('/contact')} className="flex items-center gap-2 text-white/60 text-sm hover:text-orange-400 transition-colors cursor-pointer">
+              <a {...openKakaoChatLink} className="flex items-center gap-2 text-white/60 text-sm hover:text-orange-400 transition-colors cursor-pointer">
+                <i className="ri-chat-3-line text-orange-400"></i>KakaoTalk
+              </a>
+              <a {...openKakaoChatLink} className="flex items-center gap-2 text-white/60 text-sm hover:text-orange-400 transition-colors cursor-pointer">
                 <i className="ri-send-plane-line text-orange-400"></i>{t('문의하기', 'Contact Us')}
-              </button>
+              </a>
             </div>
             <div className="mt-6 bg-white/10 rounded-xl p-4">
               <p className="text-white/80 text-xs font-semibold mb-1">{t('빠른 상담', 'Quick Contact')}</p>

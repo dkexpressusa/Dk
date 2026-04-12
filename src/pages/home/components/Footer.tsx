@@ -1,3 +1,5 @@
+import { openKakaoChatLink } from '@/constants/openKakao';
+
 export default function Footer() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -36,7 +38,6 @@ export default function Footer() {
                 { label: '배송 절차', id: 'process' },
                 { label: '고객 지원', id: 'support' },
                 { label: '이용 후기', id: 'reviews' },
-                { label: '문의하기', id: 'contact' },
               ].map((item) => (
                 <li key={item.id}>
                   <button onClick={() => scrollTo(item.id)} className="text-gray-500 text-sm hover:text-orange-500 transition-colors cursor-pointer">
@@ -44,6 +45,11 @@ export default function Footer() {
                   </button>
                 </li>
               ))}
+              <li>
+                <a {...openKakaoChatLink} className="text-gray-500 text-sm hover:text-orange-500 transition-colors cursor-pointer">
+                  문의하기
+                </a>
+              </li>
             </ul>
           </div>
 

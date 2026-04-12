@@ -1,13 +1,7 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import PhoneModal from '@/components/base/PhoneModal';
-import KakaoModal from '@/components/base/KakaoModal';
 import { useLang } from '@/contexts/LanguageContext';
+import { openKakaoChatLink } from '@/constants/openKakao';
 
 export default function HeroBanner() {
-  const navigate = useNavigate();
-  const [showPhone, setShowPhone] = useState(false);
-  const [showKakao, setShowKakao] = useState(false);
   const { lang, t } = useLang();
 
   return (
@@ -47,27 +41,27 @@ export default function HeroBanner() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 mb-12">
-            <button
-              onClick={() => navigate('/contact')}
+            <a
+              {...openKakaoChatLink}
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-all duration-200 hover:scale-105 whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 text-base"
             >
               <i className="ri-send-plane-line"></i>
               {t('문의하기', 'Contact Us')}
-            </button>
-            <button
-              onClick={() => setShowPhone(true)}
+            </a>
+            <a
+              {...openKakaoChatLink}
               className="border border-white/40 hover:border-white text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 backdrop-blur-sm whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 text-base"
             >
               <i className="ri-phone-line"></i>
               {t('전화 상담', 'Call Us')}
-            </button>
-            <button
-              onClick={() => setShowKakao(true)}
+            </a>
+            <a
+              {...openKakaoChatLink}
               className="bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-4 rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 text-base"
             >
               <i className="ri-chat-3-line"></i>
               {t('카카오톡 상담', 'KakaoTalk')}
-            </button>
+            </a>
           </div>
 
           <div className="flex flex-wrap gap-6">
@@ -92,9 +86,6 @@ export default function HeroBanner() {
           <i className="ri-arrow-down-line text-white/40"></i>
         </div>
       </div>
-
-      {showPhone && <PhoneModal onClose={() => setShowPhone(false)} />}
-      {showKakao && <KakaoModal onClose={() => setShowKakao(false)} />}
     </section>
   );
 }

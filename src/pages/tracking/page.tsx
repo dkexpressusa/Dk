@@ -1,15 +1,9 @@
-import { useState } from 'react';
 import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
-import { useNavigate } from 'react-router-dom';
-import PhoneModal from '@/components/base/PhoneModal';
-import KakaoModal from '@/components/base/KakaoModal';
 import { useLang } from '@/contexts/LanguageContext';
+import { openKakaoChatLink } from '@/constants/openKakao';
 
 export default function TrackingPage() {
-  const [showPhone, setShowPhone] = useState(false);
-  const [showKakao, setShowKakao] = useState(false);
-  const navigate = useNavigate();
   const { t } = useLang();
 
   const trackingLinks = [
@@ -73,15 +67,15 @@ export default function TrackingPage() {
               <div className="border-t border-gray-200 pt-8">
                 <p className="text-gray-500 text-sm mb-5">{t('문의가 필요하신가요?', 'Need assistance?')}</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button onClick={() => navigate('/contact')} className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+                  <a {...openKakaoChatLink} className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
                     <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
-                  </button>
-                  <button onClick={() => setShowPhone(true)} className="inline-flex items-center justify-center gap-2 bg-[#1E3A8A] hover:bg-[#152a66] text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+                  </a>
+                  <a {...openKakaoChatLink} className="inline-flex items-center justify-center gap-2 bg-[#1E3A8A] hover:bg-[#152a66] text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
                     <i className="ri-phone-line"></i>{t('전화 상담', 'Call Us')}
-                  </button>
-                  <button onClick={() => setShowKakao(true)} className="inline-flex items-center justify-center gap-2 bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+                  </a>
+                  <a {...openKakaoChatLink} className="inline-flex items-center justify-center gap-2 bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
                     <i className="ri-chat-3-line"></i>{t('카카오톡 상담', 'KakaoTalk')}
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -89,8 +83,6 @@ export default function TrackingPage() {
         </div>
       </section>
       <Footer />
-      {showPhone && <PhoneModal onClose={() => setShowPhone(false)} />}
-      {showKakao && <KakaoModal onClose={() => setShowKakao(false)} />}
     </div>
   );
 }

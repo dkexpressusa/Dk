@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
-import { useNavigate } from 'react-router-dom';
-import PhoneModal from '@/components/base/PhoneModal';
-import KakaoModal from '@/components/base/KakaoModal';
 import { supabase } from '@/lib/supabase';
 import { useLang } from '@/contexts/LanguageContext';
+import { openKakaoChatLink } from '@/constants/openKakao';
 
 interface FAQ {
   id: string;
@@ -20,11 +18,8 @@ interface FAQ {
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<string | null>(null);
-  const [showPhone, setShowPhone] = useState(false);
-  const [showKakao, setShowKakao] = useState(false);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const { lang, t } = useLang();
 
   useEffect(() => {
@@ -108,22 +103,20 @@ export default function FAQPage() {
             <h3 className="text-xl font-black text-white mb-2">{t('지금 바로 문의하세요', 'Still Have Questions?')}</h3>
             <p className="text-white/60 text-sm mb-6">{t('직접 문의하시면 빠르게 답변드리겠습니다', 'Contact us directly and we\'ll get back to you quickly')}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button onClick={() => navigate('/contact')} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
+              <a {...openKakaoChatLink} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
                 <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
-              </button>
-              <button onClick={() => setShowPhone(true)} className="border border-white/30 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
+              </a>
+              <a {...openKakaoChatLink} className="border border-white/30 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
                 <i className="ri-phone-line"></i>{t('전화 상담', 'Call Us')}
-              </button>
-              <button onClick={() => setShowKakao(true)} className="bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
+              </a>
+              <a {...openKakaoChatLink} className="bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
                 <i className="ri-chat-3-line"></i>{t('카카오톡 상담', 'KakaoTalk')}
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
       <Footer />
-      {showPhone && <PhoneModal onClose={() => setShowPhone(false)} />}
-      {showKakao && <KakaoModal onClose={() => setShowKakao(false)} />}
     </div>
   );
 }

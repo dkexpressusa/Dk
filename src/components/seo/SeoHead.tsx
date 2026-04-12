@@ -17,6 +17,7 @@ export default function SeoHead() {
 
   useLayoutEffect(() => {
     document.documentElement.lang = "ko";
+    document.querySelectorAll("meta[data-og-default]").forEach((el) => el.remove());
   }, []);
 
   const head = typeof document !== "undefined" ? document.head : null;
