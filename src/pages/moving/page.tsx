@@ -3,6 +3,7 @@ import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
 import { useLang } from '@/contexts/LanguageContext';
 import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
+import { usePhoneContactModal } from '@/contexts/PhoneContactModalContext';
 
 const galleryItems = [
   { img: '/images/img7.jpg', labelKo: '귀국 짐 포장 준비', labelEn: 'Packing for Return' },
@@ -14,6 +15,7 @@ export default function MovingPage() {
   const { lang, t } = useLang();
   const navigate = useNavigate();
   const { openKakaoContactModal } = useKakaoContactModal();
+  const { openPhoneContactModal } = usePhoneContactModal();
 
   const items = [
     t('의류 및 패션 아이템', 'Clothing & Fashion Items'),
@@ -138,7 +140,7 @@ export default function MovingPage() {
             <button type="button" onClick={() => navigate('/contact')} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap transition-colors flex items-center justify-center gap-2">
               <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
             </button>
-            <button type="button" onClick={openKakaoContactModal} className="border border-white/30 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
+            <button type="button" onClick={openPhoneContactModal} className="border border-white/30 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
               <i className="ri-phone-line"></i>{t('전화 상담', 'Call Us')}
             </button>
             <button type="button" onClick={openKakaoContactModal} className="bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">

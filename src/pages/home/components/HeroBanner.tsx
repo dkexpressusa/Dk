@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
 import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
+import { usePhoneContactModal } from '@/contexts/PhoneContactModalContext';
 
 export default function HeroBanner() {
   const { lang, t } = useLang();
   const { openKakaoContactModal } = useKakaoContactModal();
+  const { openPhoneContactModal } = usePhoneContactModal();
 
   return (
     <section className="relative w-full min-h-screen flex items-center overflow-x-hidden">
@@ -52,7 +54,7 @@ export default function HeroBanner() {
             </Link>
             <button
               type="button"
-              onClick={openKakaoContactModal}
+              onClick={openPhoneContactModal}
               className="border border-white/40 hover:border-white text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 backdrop-blur-sm whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 text-base"
             >
               <i className="ri-phone-line"></i>

@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
 import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
+import { usePhoneContactModal } from '@/contexts/PhoneContactModalContext';
 
 export default function HomeCTA() {
   const { t } = useLang();
   const { openKakaoContactModal } = useKakaoContactModal();
+  const { openPhoneContactModal } = usePhoneContactModal();
 
   return (
     <section className="py-20 bg-[#F3F4F6]">
@@ -31,7 +33,7 @@ export default function HomeCTA() {
             </Link>
             <button
               type="button"
-              onClick={openKakaoContactModal}
+              onClick={openPhoneContactModal}
               className="border border-white/30 hover:border-white text-white font-semibold px-8 py-4 rounded-full transition-colors cursor-pointer whitespace-nowrap flex items-center justify-center gap-2"
             >
               <i className="ri-phone-line"></i>{t('전화 상담', 'Call Us')}

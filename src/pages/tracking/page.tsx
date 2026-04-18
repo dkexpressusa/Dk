@@ -3,11 +3,13 @@ import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
 import { useLang } from '@/contexts/LanguageContext';
 import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
+import { usePhoneContactModal } from '@/contexts/PhoneContactModalContext';
 
 export default function TrackingPage() {
   const { t } = useLang();
   const navigate = useNavigate();
   const { openKakaoContactModal } = useKakaoContactModal();
+  const { openPhoneContactModal } = usePhoneContactModal();
 
   const trackingLinks = [
     { name: t('CJ택배', 'CJ Logistics'), url: 'https://www.cjlogistics.com/ko/tool/parcel/tracking', desc: t('한국 내 최종 배송 조회', 'Final delivery tracking in Korea'), color: 'bg-[#1E3A8A]' },
@@ -73,7 +75,7 @@ export default function TrackingPage() {
                   <button type="button" onClick={() => navigate('/contact')} className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
                     <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
                   </button>
-                  <button type="button" onClick={openKakaoContactModal} className="inline-flex items-center justify-center gap-2 bg-[#1E3A8A] hover:bg-[#152a66] text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+                  <button type="button" onClick={openPhoneContactModal} className="inline-flex items-center justify-center gap-2 bg-[#1E3A8A] hover:bg-[#152a66] text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
                     <i className="ri-phone-line"></i>{t('전화 상담', 'Call Us')}
                   </button>
                   <button type="button" onClick={openKakaoContactModal} className="inline-flex items-center justify-center gap-2 bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">

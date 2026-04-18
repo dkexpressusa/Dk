@@ -5,6 +5,8 @@ import Footer from '@/components/feature/Footer';
 import { supabase } from '@/lib/supabase';
 import { useLang } from '@/contexts/LanguageContext';
 import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
+import { usePhoneContactModal } from '@/contexts/PhoneContactModalContext';
+import { PHONE_DISPLAY } from '@/constants/phoneContact';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -13,6 +15,7 @@ export default function ContactPage() {
   const [error, setError] = useState('');
   const { t } = useLang();
   const { openKakaoContactModal } = useKakaoContactModal();
+  const { openPhoneContactModal } = usePhoneContactModal();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,7 +65,7 @@ export default function ContactPage() {
   const contactInfo = [
     { icon: 'ri-map-pin-2-line', label: t('주소', 'Address'), value: '141-47 Northern Blvd, Flushing, NY 11354' },
     { icon: 'ri-time-line', label: t('영업시간', 'Hours'), value: t('월~금 9AM–6PM, 토 9:30AM–6PM', 'Mon–Fri 9AM–6PM, Sat 9:30AM–6PM') },
-    { icon: 'ri-phone-line', label: t('전화', 'Phone'), value: '718-762-6488' },
+    { icon: 'ri-phone-line', label: t('전화', 'Phone'), value: PHONE_DISPLAY },
     { icon: 'ri-mail-line', label: t('이메일', 'Email'), value: 'dkexpressusa@gmail.com' },
   ];
 
@@ -103,15 +106,14 @@ export default function ContactPage() {
               <div className="space-y-3">
                 <button
                   type="button"
-                  onClick={() =>
-                    document.getElementById('contact-inquiry-form')?.scrollIntoView({ behavior: 'smooth' })
-                  }
+                  onClick={openPhoneContactModal}
                   className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl hover:bg-orange-50 transition-colors cursor-pointer w-full text-left border-0"
                 >
-                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center"><i className="ri-send-plane-line text-white text-lg"></i></div>
+                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center"><i className="ri-phone-line text-white text-lg"></i></div>
                   <div>
                     <p className="text-xs text-gray-400">{t('문의하기', 'Contact')}</p>
-                    <p className="font-bold text-gray-900">{t('온라인 문의', 'Online inquiry')}</p>
+                    <p className="font-bold text-gray-900">{t('전화 상담', 'Call Us')}</p>
+                    <p className="text-sm font-semibold text-[#1E3A8A] mt-0.5">{PHONE_DISPLAY}</p>
                   </div>
                 </button>
                 <button
