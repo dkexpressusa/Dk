@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
 import { useLang } from '@/contexts/LanguageContext';
@@ -5,6 +6,7 @@ import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 export default function HowToPage() {
   const { t } = useLang();
+  const navigate = useNavigate();
   const { openKakaoContactModal } = useKakaoContactModal();
 
   const steps = [
@@ -79,7 +81,7 @@ export default function HowToPage() {
             <h2 className="text-2xl font-black text-white mb-2">{t('지금 바로 문의하세요', 'Get in Touch Today')}</h2>
             <p className="text-white/60 text-sm mb-6">{t('문의만 주시면 끝까지 안내해드립니다', 'Just reach out — we\'ll guide you every step of the way')}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button type="button" onClick={openKakaoContactModal} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap transition-colors flex items-center justify-center gap-2">
+              <button type="button" onClick={() => navigate('/contact')} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap transition-colors flex items-center justify-center gap-2">
                 <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
               </button>
               <button type="button" onClick={openKakaoContactModal} className="border border-white/30 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">

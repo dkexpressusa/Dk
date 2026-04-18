@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 const supportItems = [
@@ -90,14 +91,13 @@ export default function Support() {
               <i className="ri-chat-3-line"></i>
               카카오톡 상담
             </button>
-            <button
-              type="button"
-              onClick={openKakaoContactModal}
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white font-semibold px-6 py-3 rounded-full transition-colors whitespace-nowrap cursor-pointer"
             >
               <i className="ri-send-plane-line"></i>
               문의하기
-            </button>
+            </Link>
           </div>
         </div>
       </div>

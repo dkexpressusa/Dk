@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
 import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
@@ -22,13 +23,12 @@ export default function HomeCTA() {
             )}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              type="button"
-              onClick={openKakaoContactModal}
+            <Link
+              to="/contact"
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-all hover:scale-105 cursor-pointer whitespace-nowrap flex items-center justify-center gap-2"
             >
               <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
-            </button>
+            </Link>
             <button
               type="button"
               onClick={openKakaoContactModal}

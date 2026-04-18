@@ -1,7 +1,6 @@
-import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
-  const { openKakaoContactModal } = useKakaoContactModal();
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -47,13 +46,12 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <button
-                  type="button"
-                  onClick={openKakaoContactModal}
-                  className="text-gray-500 text-sm hover:text-orange-500 transition-colors cursor-pointer text-left bg-transparent border-0 p-0"
+                <Link
+                  to="/contact"
+                  className="text-gray-500 text-sm hover:text-orange-500 transition-colors cursor-pointer"
                 >
                   문의하기
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

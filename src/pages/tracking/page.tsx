@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
 import { useLang } from '@/contexts/LanguageContext';
@@ -5,6 +6,7 @@ import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 export default function TrackingPage() {
   const { t } = useLang();
+  const navigate = useNavigate();
   const { openKakaoContactModal } = useKakaoContactModal();
 
   const trackingLinks = [
@@ -68,7 +70,7 @@ export default function TrackingPage() {
               <div className="border-t border-gray-200 pt-8">
                 <p className="text-gray-500 text-sm mb-5">{t('문의가 필요하신가요?', 'Need assistance?')}</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button type="button" onClick={openKakaoContactModal} className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+                  <button type="button" onClick={() => navigate('/contact')} className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">
                     <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
                   </button>
                   <button type="button" onClick={openKakaoContactModal} className="inline-flex items-center justify-center gap-2 bg-[#1E3A8A] hover:bg-[#152a66] text-white font-bold px-8 py-3.5 rounded-full transition-colors cursor-pointer whitespace-nowrap">

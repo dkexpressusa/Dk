@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
-import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 const navLinksKo = [
   { label: '한국 일반 택배', labelEn: 'Korea Shipping', path: '/shipping' },
@@ -19,7 +18,6 @@ export default function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === '/';
   const { lang, setLang, t } = useLang();
-  const { openKakaoContactModal } = useKakaoContactModal();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -102,7 +100,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            onClick={openKakaoContactModal}
+            onClick={() => navigate('/contact')}
             className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors whitespace-nowrap cursor-pointer inline-flex items-center justify-center"
           >
             {t('문의하기', 'Contact Us')}
@@ -150,7 +148,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => {
-              openKakaoContactModal();
+              navigate('/contact');
               setMenuOpen(false);
             }}
             className="bg-orange-500 text-white text-sm font-bold px-5 py-2.5 rounded-full whitespace-nowrap cursor-pointer mt-2 inline-flex items-center justify-center"

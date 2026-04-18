@@ -72,7 +72,7 @@ export default function Footer() {
               </button>
               <button
                 type="button"
-                onClick={openKakaoContactModal}
+                onClick={() => navigate('/contact')}
                 className="flex items-center gap-2 text-white/60 text-sm hover:text-orange-400 transition-colors cursor-pointer text-left w-full bg-transparent border-0 p-0"
               >
                 <i className="ri-send-plane-line text-orange-400"></i>{t('문의하기', 'Contact Us')}

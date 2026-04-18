@@ -103,13 +103,15 @@ export default function ContactPage() {
               <div className="space-y-3">
                 <button
                   type="button"
-                  onClick={openKakaoContactModal}
+                  onClick={() =>
+                    document.getElementById('contact-inquiry-form')?.scrollIntoView({ behavior: 'smooth' })
+                  }
                   className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl hover:bg-orange-50 transition-colors cursor-pointer w-full text-left border-0"
                 >
                   <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center"><i className="ri-send-plane-line text-white text-lg"></i></div>
                   <div>
                     <p className="text-xs text-gray-400">{t('문의하기', 'Contact')}</p>
-                    <p className="font-bold text-gray-900">{t('카카오톡 문의', 'KakaoTalk')}</p>
+                    <p className="font-bold text-gray-900">{t('온라인 문의', 'Online inquiry')}</p>
                   </div>
                 </button>
                 <button
@@ -143,7 +145,7 @@ export default function ContactPage() {
               <>
                 <h3 className="text-xl font-black text-[#1E3A8A] mb-6">{t('문의하기', 'Send a Message')}</h3>
                 {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">{error}</div>}
-                <form data-readdy-form="true" onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form id="contact-inquiry-form" data-readdy-form="true" onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-semibold text-gray-500 mb-1.5 block">{t('이름', 'Name')} *</label>

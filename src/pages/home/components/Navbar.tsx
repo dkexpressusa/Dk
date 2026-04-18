@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { openKakaoContactModal } = useKakaoContactModal();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -68,13 +67,12 @@ export default function Navbar() {
           >
             <i className="ri-phone-line mr-1"></i>718-762-6488
           </a>
-          <button
-            type="button"
-            onClick={openKakaoContactModal}
+          <Link
+            to="/contact"
             className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors whitespace-nowrap cursor-pointer inline-flex items-center justify-center"
           >
             문의하기
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Hamburger */}
@@ -104,13 +102,13 @@ export default function Navbar() {
               {item.label}
             </button>
           ))}
-          <button
-            type="button"
-            onClick={openKakaoContactModal}
+          <Link
+            to="/contact"
+            onClick={() => setMenuOpen(false)}
             className="bg-orange-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full whitespace-nowrap cursor-pointer inline-flex items-center justify-center"
           >
             문의하기
-          </button>
+          </Link>
         </div>
       )}
     </nav>

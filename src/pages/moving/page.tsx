@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/feature/Navbar';
 import Footer from '@/components/feature/Footer';
 import { useLang } from '@/contexts/LanguageContext';
@@ -11,6 +12,7 @@ const galleryItems = [
 
 export default function MovingPage() {
   const { lang, t } = useLang();
+  const navigate = useNavigate();
   const { openKakaoContactModal } = useKakaoContactModal();
 
   const items = [
@@ -133,7 +135,7 @@ export default function MovingPage() {
           <h2 className="text-2xl md:text-3xl font-black text-white mb-2">{t('지금 바로 문의하세요', 'Get in Touch Today')}</h2>
           <p className="text-white/60 mb-6">{t('빠른 상담으로 최적의 배송 방법을 안내해 드립니다', 'Quick consultation to find the best shipping solution for you')}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button type="button" onClick={openKakaoContactModal} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap transition-colors flex items-center justify-center gap-2">
+            <button type="button" onClick={() => navigate('/contact')} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap transition-colors flex items-center justify-center gap-2">
               <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
             </button>
             <button type="button" onClick={openKakaoContactModal} className="border border-white/30 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full cursor-pointer whitespace-nowrap flex items-center justify-center gap-2 transition-colors">
