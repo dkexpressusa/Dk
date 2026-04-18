@@ -120,7 +120,7 @@ export default function ContactPage() {
                   <div className="w-10 h-10 bg-[#FEE500] rounded-lg flex items-center justify-center"><i className="ri-chat-3-line text-[#3C1E1E] text-lg"></i></div>
                   <div>
                     <p className="text-xs text-gray-400">KakaoTalk</p>
-                    <p className="font-bold text-gray-900">DKEXPRESS</p>
+                    <p className="font-bold text-gray-900">dkexpress</p>
                   </div>
                 </button>
               </div>
