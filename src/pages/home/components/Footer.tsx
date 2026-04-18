@@ -1,6 +1,7 @@
-import { openKakaoChatLink } from '@/constants/openKakao';
+import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 export default function Footer() {
+  const { openKakaoContactModal } = useKakaoContactModal();
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -46,9 +47,13 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <a {...openKakaoChatLink} className="text-gray-500 text-sm hover:text-orange-500 transition-colors cursor-pointer">
+                <button
+                  type="button"
+                  onClick={openKakaoContactModal}
+                  className="text-gray-500 text-sm hover:text-orange-500 transition-colors cursor-pointer text-left bg-transparent border-0 p-0"
+                >
                   문의하기
-                </a>
+                </button>
               </li>
             </ul>
           </div>

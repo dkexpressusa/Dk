@@ -1,86 +1,128 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import {
+  KAKAO_QR_IMAGE_SRC,
+  KAKAO_TALK_ID_COPY,
+  KAKAO_TALK_ID_LABEL,
+} from "@/constants/kakaoContact";
 
 interface KakaoModalProps {
   onClose: () => void;
 }
 
 export default function KakaoModal({ onClose }: KakaoModalProps) {
-  const [copied, setCopied] = useState(false);
-  const kakaoId = 'dkexpress';
+  const [toast, setToast] = useState(false);
 
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [onClose]);
 
+  const showCopiedToast = () => {
+    setToast(true);
+    window.setTimeout(() => setToast(false), 2500);
+  };
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(kakaoId).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+    void navigator.clipboard.writeText(KAKAO_TALK_ID_COPY).then(showCopiedToast).catch(() => {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = KAKAO_TALK_ID_COPY;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showCopiedToast();
+      } catch {
+        /* ignore */
+      }
     });
   };
 
   return (
-    <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm"
-      onClick={onClose}
-    >
+    <>
       <div
-        className="bg-white rounded-3xl p-8 mx-4 max-w-sm w-full text-center"
-        onClick={(e) => e.stopPropagation()}
+        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+        onClick={onClose}
+        role="presentation"
       >
-        {/* 카카오 아이콘 */}
-        <div className="w-16 h-16 bg-[#FEE500] rounded-full flex items-center justify-center mx-auto mb-4">
-          <i className="ri-chat-3-line text-[#3C1E1E] text-3xl"></i>
-        </div>
-        <h3 className="text-xl font-black text-[#1E3A8A] mb-1">카카오톡 상담</h3>
-        <p className="text-gray-500 text-sm mb-6">아이디로 검색하거나 QR코드를 스캔해 주세요</p>
-
-        {/* QR 코드 */}
-        <div className="bg-[#F3F4F6] rounded-2xl p-5 mb-5">
-          <p className="text-xs text-gray-400 font-semibold mb-3">카카오톡 QR 코드</p>
-          <div className="w-40 h-40 mx-auto bg-white rounded-xl flex items-center justify-center border border-gray-200 overflow-hidden">
-            <img
-              src="/images/KakaoTalk_20260407_002904904.png"
-              alt="카카오톡 QR코드"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <p className="text-xs text-gray-400 mt-3">카카오톡 앱에서 QR코드 스캔</p>
-        </div>
-
-        {/* 아이디 복사 */}
-        <div className="bg-[#FEE500]/20 border border-[#FEE500] rounded-2xl p-4 mb-5">
-          <p className="text-xs text-gray-500 font-semibold mb-2">카카오톡 아이디</p>
-          <div className="flex items-center justify-between gap-3">
-            <span className="font-black text-[#1E3A8A] text-xl tracking-wide">{kakaoId}</span>
-            <button
-              onClick={handleCopy}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                copied
-                  ? 'bg-green-500 text-white'
-                  : 'bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E]'
-              }`}
-            >
-              <i className={`${copied ? 'ri-check-line' : 'ri-file-copy-line'}`}></i>
-              {copied ? '복사됨!' : '복사'}
-            </button>
-          </div>
-        </div>
-
-        <p className="text-gray-400 text-xs mb-5">
-          카카오톡 앱 &rarr; 친구 &rarr; 검색에서<br />
-          아이디를 입력하거나 QR코드를 스캔하세요
-        </p>
-
-        <button
-          onClick={onClose}
-          className="text-gray-400 hover:text-gray-600 text-sm cursor-pointer transition-colors"
+        <div
+          className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-xl"
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="kakao-modal-title"
         >
-          닫기
-        </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-800 cursor-pointer"
+            aria-label="닫기"
+          >
+            <i className="ri-close-line text-2xl leading-none" />
+          </button>
+
+          <div className="px-5 pb-6 pt-14 sm:px-8 sm:pb-8 sm:pt-16">
+            <h2
+              id="kakao-modal-title"
+              className="text-center text-xl font-black text-[#1E3A8A] sm:text-2xl"
+            >
+              카카오톡 문의 안내
+            </h2>
+
+            <div className="my-6 flex justify-center sm:my-8">
+              <div className="w-full max-w-[240px] rounded-xl bg-[#F3F4F6] p-4 sm:max-w-[260px] sm:p-5">
+                <img
+                  src={KAKAO_QR_IMAGE_SRC}
+                  alt="카카오톡 QR 코드"
+                  className="mx-auto h-auto w-full max-h-[260px] object-contain"
+                  width={260}
+                  height={260}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <p className="text-center text-lg font-bold tracking-wide text-gray-900 sm:text-left sm:text-xl">
+                {KAKAO_TALK_ID_LABEL}
+              </p>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="shrink-0 rounded-full bg-[#FEE500] px-5 py-2.5 text-sm font-bold text-[#3C1E1E] transition-colors hover:bg-[#F5DC00] cursor-pointer whitespace-nowrap"
+              >
+                복사하기
+              </button>
+            </div>
+
+            <p className="mt-6 text-center text-sm leading-relaxed text-gray-500">
+              카카오톡에 접속 후
+              <br />
+              친구추가 → QR코드 스캔 또는
+              <br />
+              아이디를 붙여넣어 친구추가 해주세요.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {toast && (
+        <div
+          className="fixed bottom-8 left-1/2 z-[300] -translate-x-1/2 rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white shadow-lg"
+          role="status"
+        >
+          복사되었습니다
+        </div>
+      )}
+    </>
   );
 }

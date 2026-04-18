@@ -1,6 +1,7 @@
-import { openKakaoChatLink } from '@/constants/openKakao';
+import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 export default function Hero() {
+  const { openKakaoContactModal } = useKakaoContactModal();
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -42,13 +43,14 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              {...openKakaoChatLink}
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-full transition-all duration-200 hover:scale-105 whitespace-nowrap cursor-pointer flex items-center justify-center gap-2"
             >
               <i className="ri-send-plane-line"></i>
               지금 문의하기
-            </a>
+            </button>
             <button
               onClick={() => scrollTo('services')}
               className="border border-white/50 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-200 backdrop-blur-sm whitespace-nowrap cursor-pointer flex items-center justify-center gap-2"

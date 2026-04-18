@@ -1,8 +1,9 @@
 import { useLang } from '@/contexts/LanguageContext';
-import { openKakaoChatLink } from '@/constants/openKakao';
+import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 export default function HeroBanner() {
   const { lang, t } = useLang();
+  const { openKakaoContactModal } = useKakaoContactModal();
 
   return (
     <section className="relative w-full min-h-screen flex items-center overflow-x-hidden">
@@ -41,27 +42,30 @@ export default function HeroBanner() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 mb-12">
-            <a
-              {...openKakaoChatLink}
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-all duration-200 hover:scale-105 whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 text-base"
             >
               <i className="ri-send-plane-line"></i>
               {t('문의하기', 'Contact Us')}
-            </a>
-            <a
-              {...openKakaoChatLink}
+            </button>
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="border border-white/40 hover:border-white text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 backdrop-blur-sm whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 text-base"
             >
               <i className="ri-phone-line"></i>
               {t('전화 상담', 'Call Us')}
-            </a>
-            <a
-              {...openKakaoChatLink}
+            </button>
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-4 rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 text-base"
             >
               <i className="ri-chat-3-line"></i>
               {t('카카오톡 상담', 'KakaoTalk')}
-            </a>
+            </button>
           </div>
 
           <div className="flex flex-wrap gap-6">

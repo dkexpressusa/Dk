@@ -1,8 +1,9 @@
 import { useLang } from '@/contexts/LanguageContext';
-import { openKakaoChatLink } from '@/constants/openKakao';
+import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 export default function HomeCTA() {
   const { t } = useLang();
+  const { openKakaoContactModal } = useKakaoContactModal();
 
   return (
     <section className="py-20 bg-[#F3F4F6]">
@@ -21,24 +22,27 @@ export default function HomeCTA() {
             )}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              {...openKakaoChatLink}
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-all hover:scale-105 cursor-pointer whitespace-nowrap flex items-center justify-center gap-2"
             >
               <i className="ri-send-plane-line"></i>{t('문의하기', 'Contact Us')}
-            </a>
-            <a
-              {...openKakaoChatLink}
+            </button>
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="border border-white/30 hover:border-white text-white font-semibold px-8 py-4 rounded-full transition-colors cursor-pointer whitespace-nowrap flex items-center justify-center gap-2"
             >
               <i className="ri-phone-line"></i>{t('전화 상담', 'Call Us')}
-            </a>
-            <a
-              {...openKakaoChatLink}
+            </button>
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="bg-[#FEE500] hover:bg-[#F5DC00] text-[#3C1E1E] font-bold px-8 py-4 rounded-full transition-colors cursor-pointer whitespace-nowrap flex items-center justify-center gap-2"
             >
               <i className="ri-chat-3-line"></i>{t('카카오톡 상담', 'KakaoTalk')}
-            </a>
+            </button>
           </div>
         </div>
       </div>

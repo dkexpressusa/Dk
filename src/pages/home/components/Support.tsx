@@ -1,4 +1,4 @@
-import { openKakaoChatLink } from '@/constants/openKakao';
+import { useKakaoContactModal } from '@/contexts/KakaoContactModalContext';
 
 const supportItems = [
   {
@@ -26,6 +26,8 @@ const supportItems = [
 ];
 
 export default function Support() {
+  const { openKakaoContactModal } = useKakaoContactModal();
+
   return (
     <section id="support" className="py-20 md:py-28 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -80,20 +82,22 @@ export default function Support() {
             <p className="text-gray-400 text-sm">유선 또는 이메일로 문의해 주시면 신속하게 답변해 드립니다.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-            <a
-              {...openKakaoChatLink}
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-full transition-colors whitespace-nowrap cursor-pointer"
             >
               <i className="ri-chat-3-line"></i>
               카카오톡 상담
-            </a>
-            <a
-              {...openKakaoChatLink}
+            </button>
+            <button
+              type="button"
+              onClick={openKakaoContactModal}
               className="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white font-semibold px-6 py-3 rounded-full transition-colors whitespace-nowrap cursor-pointer"
             >
               <i className="ri-send-plane-line"></i>
               문의하기
-            </a>
+            </button>
           </div>
         </div>
       </div>
